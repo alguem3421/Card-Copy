@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulador Educativo – Clonagem de Cartão (Antifraude)</title>
+  <meta name="description" content="Simulador 100% educativo para conscientização contra golpes de clonagem de cartão. Não coleta dados." />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-size:1.05rem">Banco Online</div>
+          <div class="muted" style="font-size:.85rem">Área de Verificação (simulação)</div>
+        </div>
+        <div class="badge" title="Simulador educativo contra fraudes">SIMULADOR EDUCATIVO</div>
+      </div>
+      <div class="addressbar" role="note" aria-label="Barra de endereço simulada">
+        <span class="addr-lock">🔓</span>
+        <span class="addr-url" id="addr">http://secure-banco-validacao.com.verify-login.xyz</span>
+        <span class="addr-flag is-suspicious hide-on-attacker">URL SUSPEITA</span>
+        <button class="btn btn-ghost hide-on-attacker" id="btnWhy">Por que é suspeita?</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="controls" style="justify-content:space-between">
+      <label class="label-switch">
+        <span>Ver como a vítima vê</span>
+        <span class="switch"><input id="toggleAttacker" type="checkbox" aria-label="Alternar modo vítima"/><span class="slider"></span></span>
+      </label>
+      <div class="inline hide-on-attacker">
+        <span class="addr-flag is-safe">NUNCA ENVIE DADOS REAIS AQUI</span>
+      </div>
+    </div>
+
+    <section class="grid" aria-label="Conteúdo principal">
+      <div class="card" aria-labelledby="tit-form">
+        <h2 id="tit-form">Verificação do Cartão</h2>
+        <p class="muted">⚠️ Campos abaixo simulam o que golpistas costumam solicitar. <strong>Não digite dados reais.</strong></p>
+
+        <form id="form">
+          <div class="input-grid">
+            <div class="full">
+              <label for="cardNumber">Número do cartão</label>
+              <input id="cardNumber" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" autocomplete="off" />
+            </div>
+            <div class="full">
+              <label for="cardName">Nome impresso no cartão</label>
+              <input id="cardName" maxlength="40" placeholder="FULANO DE TAL" autocomplete="off" />
+            </div>
+            <div>
+              <label for="exp">Validade</label>
+              <input id="exp" inputmode="numeric" maxlength="5" placeholder="MM/AA" autocomplete="off" />
+            </div>
+            <div>
+              <label for="cvv">CVV</label>
+              <input id="cvv" inputmode="numeric" maxlength="4" placeholder="000" autocomplete="off" />
+            </div>
+            <div class="full">
+              <label for="pin">Senha do cartão (NÃO INFORME A REAL)</label>
+              <input id="pin" type="password" inputmode="numeric" maxlength="6" placeholder="••••" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="inline" style="margin-top:14px">
+            <input id="consent" type="checkbox" aria-describedby="consentDesc" />
+            <label for="consent" id="consentDesc">Li e entendi que este é um <strong>simulador educativo</strong> e não envia dados.</label>
+          </div>
+
+          <div class="controls">
+            <button type="submit" class="btn btn-primary">Validar Cartão</button>
+            <button type="button" class="btn" id="fillDemo">Preencher com dados fictícios</button>
+            <button type="reset" class="btn btn-danger">Limpar</button>
+          </div>
+        </form>
+
+        <div class="warning hide-on-attacker" role="alert">
+          <strong>Como o golpe opera:</strong>
+          Sites falsos copiam o visual do banco e pedem <em>exatamente</em> esses dados. Ao clicar em "Validar", a vítima envia tudo para os criminosos.
+          <br/>Neste simulador, nada é enviado. Em vez disso, você verá um painel educativo com dicas de proteção.
+        </div>
+      </div>
+
+      <aside class="card" aria-labelledby="tit-tips">
+        <h2 id="tit-tips">Dicas rápidas de segurança</h2>
+        <ul class="tips">
+          <li>Cheque a <strong>URL</strong>: domínios com palavras extras (<code>verify-login.xyz</code>) são suspeitos.</li>
+          <li><strong>Bancos não pedem</strong> senha do cartão ou CVV por links.</li>
+          <li>Ative <strong>2FA</strong> e notificações do app do banco.</li>
+          <li>Desconfie de <strong>urgência</strong> ou <strong>brindes</strong> para capturar dados.</li>
+          <li>Digite o endereço do banco manualmente ou use o app oficial.</li>
+        </ul>
+        <div class="hint muted">Use o botão “Por que é suspeita?” na barra para aprender a identificar sinais de phishing.</div>
+      </aside>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="modalBg" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+        <div style="font-size:28px">🛡️</div>
+        <h3 id="modalTitle" style="margin:0">Proteção em primeiro lugar</h3>
+      </div>
+      <p>Se este site fosse real, seus dados poderiam ter sido <strong>roubados</strong>. Veja como se proteger:</p>
+      <div class="grid2">
+        <div class="card" style="padding:14px">
+          <h4 style="margin:0 0 8px">Sinais de golpe</h4>
+          <ul class="tips">
+            <li>URL estranha ou sem cadeado.</li>
+            <li>Erros de português e layout copiado.</li>
+            <li>Pedido de dados sensíveis (CVV, senha, token).</li>
+            <li>Promessas de bônus, urgência ou bloqueio imediato.</li>
+          </ul>
+        </div>
+        <div class="card" style="padding:14px">
+          <h4 style="margin:0 0 8px">Boas práticas</h4>
+          <ul class="tips">
+            <li>Acesse seu banco pelo app oficial.</li>
+            <li>Ative 2FA e verificação por biometria.</li>
+            <li>Nunca compartilhe códigos por mensagem.</li>
+            <li>Em dúvida? Fale com o suporte oficial.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="controls" style="margin-top:10px; justify-content:space-between">
+        <button class="btn" id="btnReport">Como denunciar</button>
+        <div>
+          <button class="btn" id="btnReset">Reiniciar simulação</button>
+          <button class="btn btn-primary" id="btnClose">Entendi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalWhy" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="whyTitle" aria-modal="true">
+      <h3 id="whyTitle">Por que esta URL é suspeita?</h3>
+      <ul class="tips">
+        <li>Usa <code>http://</code> em vez de <code>https://</code> (cadeado ausente).</li>
+        <li>Tem <em>subdomínios longos</em> e um <strong>domínio final estranho</strong> (<code>.xyz</code>).</li>
+        <li>Tenta imitar o nome de um banco com palavras como <em>secure</em>, <em>validacao</em>.</li>
+        <li>Nenhum certificado oficial verificado.</li>
+      </ul>
+      <div class="controls" style="justify-content:flex-end">
+        <button class="btn btn-primary" id="btnWhyClose">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <span>⚖️ Uso: apenas para educação e conscientização.</span>
+      <span>🔒 Nenhum dado é coletado ou enviado.</span>
+      <span>🧑‍🏫 Replique em treinamentos e palestras.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
